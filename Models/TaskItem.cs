@@ -10,13 +10,16 @@
 
         // ownership
         public int CreatorId { get; set; }
-        public User Creator { get; set; } = new User();
+        public User ? Creator { get; set; } 
 
         //project Relation
         public int ProjectId { get; set; }
-        public Project Project { get; set; } = new Project();
+        public Project ? Project { get; set; } 
 
         //task assignment relation
-        public ICollection<TaskAssignment> TaskAssignments { get; set; } = new List<TaskAssignment>();
+        public ICollection<TaskAssignment> ? TaskAssignments { get; set; }
+
+        //comment relation
+        public ICollection<Comment>? Comments { get; set; }
     }
 }
