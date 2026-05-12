@@ -116,6 +116,22 @@ namespace Server.Data
                     .OnDelete(DeleteBehavior.Cascade);
             });
 
+            //taskassignment
+            modelBuilder.Entity<Server.Models.TaskAssignment>(entity =>
+            {
+                entity.HasKey(ta => new { ta.UserId, ta.TaskItemId });
+                // Configure the relationship between TaskAssignment and User
+                entity.HasOne(ta => ta.User)
+                    .WithMany(u => u.Assignments)
+                    .HasForeignKey(ta => ta.UserId)
+                    .OnDelete(DeleteBehavior.Cascade);
+                // Configure the relationship between TaskAssignment and TaskItem
+                entity.HasOne(ta => ta.TaskItem)
+                    .WithMany(t => t.TaskAssignments)
+                    .HasForeignKey(ta => ta.TaskItemId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
             //Role
             modelBuilder.Entity<Server.Models.Role>(entity =>
             {
